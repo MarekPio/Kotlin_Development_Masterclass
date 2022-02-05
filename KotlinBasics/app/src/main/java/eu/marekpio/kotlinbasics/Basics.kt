@@ -44,4 +44,15 @@ fun main(){
 
     println("First character " + firstCharInStr)
     println("Last character " + lastCharInStr)
+
+    /* Exercise */
+    var myExClassName: String = "Android Masterclass"
+    var myExFloat: Float = 13.37F
+    val myExPi: Double = 3.14159265358979
+    var myExAge: Byte = 25
+    var myExYear: Short = 2020
+    var myExLong: Long = 18881234567
+    var myExBoolean: Boolean = true
+    var myExChar: Char = 'a'
+
 }
