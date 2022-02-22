@@ -54,14 +54,14 @@
         />
 
     <TextView
+        android:id="@+id/tvSelectedDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="14/9/2021"
         android:textColor="@color/textBlue"
-        android:textStyle="bold"
         android:textSize="20sp"
-        />
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"

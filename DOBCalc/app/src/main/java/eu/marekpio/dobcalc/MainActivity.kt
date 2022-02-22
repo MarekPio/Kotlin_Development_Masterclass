@@ -4,15 +4,21 @@ import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
+import java.text.SimpleDateFormat
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
+
+    private var tvSelectedDate : TextView? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         val btnDataPicker : Button = findViewById(R.id.btnDatePicker)
+        tvSelectedDate = findViewById(R.id.tvSelectedDate)
 
         btnDataPicker.setOnClickListener {
             clickDatePicker();
@@ -29,8 +35,18 @@ class MainActivity : AppCompatActivity() {
             /* Longer version */
 //          DatePickerDialog.OnDateSetListener{ view, year, month, dayOfMonth ->
             /* Shorter version with deleted expected function */
-            { view, year, month, dayOfMonth ->
-                Toast.makeText(this,"Datepicker works", Toast.LENGTH_LONG).show()
+            { view, selectedYear, selectedMonth, selectedDayOfMonth ->
+                Toast.makeText(this,"Year was $selectedYear" +
+                        ", month was ${selectedMonth+1}" +
+                        ", day was $selectedDayOfMonth", Toast.LENGTH_LONG).show()
+
+                val selectedDate ="$selectedDayOfMonth/${selectedMonth+1}/$selectedYear"
+
+                tvSelectedDate?.text = selectedDate
+
+                val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
+                val theDate = sdf.parse(selectedDate)
+
             },
             year,
             month,
