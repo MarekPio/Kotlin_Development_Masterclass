@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun clickDatePicker(){
+    private fun clickDatePicker(){
         val myCalendar = Calendar.getInstance()
         val year = myCalendar.get(Calendar.YEAR)
         val month = myCalendar.get(Calendar.MONTH)
@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
             /* Longer version */
 //          DatePickerDialog.OnDateSetListener{ view, year, month, dayOfMonth ->
             /* Shorter version with deleted expected function */
-            { view, selectedYear, selectedMonth, selectedDayOfMonth ->
+            { _, selectedYear, selectedMonth, selectedDayOfMonth ->
                 Toast.makeText(this,"Year was $selectedYear" +
                         ", month was ${selectedMonth+1}" +
                         ", day was $selectedDayOfMonth", Toast.LENGTH_LONG).show()
@@ -49,15 +49,19 @@ class MainActivity : AppCompatActivity() {
                 val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
                 val theDate = sdf.parse(selectedDate)
 
-                val selectedDateInMinutes = theDate.time / 60000
+                theDate?.let {
+                    val selectedDateInMinutes = theDate.time / 60000
 
-                val currentDate = sdf.parse(sdf.format(System.currentTimeMillis()))
+                    val currentDate = sdf.parse(sdf.format(System.currentTimeMillis()))
+                    currentDate?.let {
+                        val currentDateInMinutes = currentDate.time / 60000
 
-                val currentDateInMinutes = currentDate.time / 60000
+                        val differenceInMinutes = currentDateInMinutes - selectedDateInMinutes
 
-                val differenceInMinutes = currentDateInMinutes - selectedDateInMinutes
+                        tvAgeInMinutes?.text = differenceInMinutes.toString()
+                    }
 
-                tvAgeInMinutes?.text = differenceInMinutes.toString()
+                }
 
             },
             year,
